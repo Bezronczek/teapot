@@ -39,14 +39,16 @@ TEALex::state TEALex::getToken(std::string & strToken) {
 				m_enumState = NOOP;
 				++m_itCurrPos;
 				break;
+			} else if ((m_enumState == STRING) && (m_bEscapeChar)) {
+				m_bEscapeChar = false;
 			}
 		} else if ((byte == '\\') && (m_enumState == STRING)) {
 			if (m_bEscapeChar) {
 				m_bEscapeChar = false;
 				strResult += byte;
-				continue;
 			}
 			m_bEscapeChar = true;
+			continue;
 		} else if ((byte >= '0') && (byte <= '9') && (m_enumState == NOOP)) {
 			enumResult = m_enumState = NUMBER;
 		} else if ((m_enumState == NUMBER) && (byte == 'x')) {
