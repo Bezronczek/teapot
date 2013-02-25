@@ -13,11 +13,13 @@ int main(int argc, char** argv) {
 			boost::program_options::value<std::string>(), "input file")(
 			"output-file,o", boost::program_options::value<std::string>(),
 			"output file");
+	boost::program_options::positional_options_description p;
+	p.add("input-file", -1);
 
 	boost::program_options::variables_map vm;
 	boost::program_options::store(
-			boost::program_options::parse_command_line(argc, argv, allowed),
-			vm);
+			boost::program_options::command_line_parser(argc, argv).options(
+					allowed).positional(p).run(), vm);
 	boost::program_options::notify(vm);
 
 	if (vm.count("help")) {
