@@ -30,6 +30,12 @@ void parseFile(const std::string& filepath) {
 			case TEALex::state::STRING:
 				std::cout << "String ";
 				break;
+			case TEALex::state::FLOAT:
+				std::cout << "Float ";
+				break;
+			case TEALex::state::HEX:
+				std::cout << "Hex ";
+				break;
 			default:
 				std::cout << "What happen?" << std::endl;
 				break;

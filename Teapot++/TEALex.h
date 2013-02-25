@@ -15,7 +15,7 @@ public:
 	TEALex();
 	virtual ~TEALex();
 	enum state {
-		NOOP, STATEMENT, STRING, LABEL, POINTER, NUMBER
+		NOOP, STATEMENT, STRING, LABEL, POINTER, NUMBER, FLOAT, HEX
 	};
 	void feed(const std::string& strString) {
 		m_enumState = NOOP;

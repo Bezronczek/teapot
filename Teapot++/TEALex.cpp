@@ -23,6 +23,8 @@ TEALex::state TEALex::getToken(std::string & strToken) {
 			if (m_enumState == NOOP) {
 				m_enumState = LABEL;
 				continue;
+			} else if (m_enumState == NUMBER) {
+				m_enumState = FLOAT;
 			}
 		} else if ((byte == ';') && (m_enumState != STRING)) {
 			enumResult = m_enumState;
@@ -46,8 +48,11 @@ TEALex::state TEALex::getToken(std::string & strToken) {
 			}
 			m_bEscapeChar = true;
 		} else if ((byte >= '0') && (byte <= '9') && (m_enumState == NOOP)) {
-			m_enumState = NUMBER;
+			enumResult = m_enumState = NUMBER;
+		} else if ((m_enumState == NUMBER) && (byte == 'x')) {
+			enumResult = m_enumState = HEX;
 		} else if ((m_enumState == NOOP)
+
 				&& (((byte >= 'a') && (byte <= 'z'))
 						|| ((byte >= 'A') && (byte <= 'Z')))) {
 			m_enumState = STATEMENT;
@@ -56,14 +61,17 @@ TEALex::state TEALex::getToken(std::string & strToken) {
 		}
 		if ((byte == '\t') || (byte == ' ') || (byte == ',')) {
 			if ((m_enumState == LABEL) || (m_enumState == STATEMENT)
-					|| (m_enumState == POINTER)) {
+					|| (m_enumState == POINTER) || (m_enumState == NUMBER)
+					|| (m_enumState == FLOAT) || (m_enumState == HEX)) {
 				enumResult = m_enumState;
 				m_enumState = NOOP;
 				break;
 			}
 		}
 		if ((m_enumState == STRING) || (m_enumState == LABEL)
-				|| (m_enumState == STATEMENT) || (m_enumState == POINTER)) {
+				|| (m_enumState == STATEMENT) || (m_enumState == POINTER)
+				|| (m_enumState == NUMBER) || (m_enumState == FLOAT)
+				|| (m_enumState == HEX)) {
 			enumResult = m_enumState;
 			strResult += byte;
 		}
