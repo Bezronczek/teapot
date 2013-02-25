@@ -3,10 +3,10 @@
 #include <iostream>
 
 
-void parseFile(char* filepath)
+void parseFile(const std::string& filepath)
 {
 	std::ifstream parsedFile;
-	parsedFile.open(filepath);
+	parsedFile.open(filepath.c_str());
 	std::string line;
 	//system("cls"); In linux standard library there is no such thing like conio.h
 	while(parsedFile.good())

@@ -1,6 +1,6 @@
 #include <string>
 #include <vector>
-void parseFile(char* filepath);
+void parseFile(const std::string& filepath);
 //funkcja obslugujaca linie zaczynajace sie kropka
 void special(char* token, char* param);
 //funkcja obslugujca linie zaczynajaece sie malym znakiem
