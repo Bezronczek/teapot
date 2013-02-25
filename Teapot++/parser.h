@@ -1,5 +1,6 @@
 #include <string>
 #include <vector>
+#include "TEALex.h"
 void parseFile(const std::string& filepath);
 //funkcja obslugujaca linie zaczynajace sie kropka
 void special(char* token, char* param);
