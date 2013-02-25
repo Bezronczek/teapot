@@ -1,6 +1,7 @@
 #include <iostream>
-#include <conio.h>
-//#include <string>
+//#include <conio.h> Unable to use in linux
+#include <string.h> // This library contains strcmp and other function which start from str and mem prefix
+#include <string>
 #include "parser.h"
 
 #define TZX_MAIN_FILE "main.tzx";

@@ -8,7 +8,7 @@ void parseFile(char* filepath)
 	std::ifstream parsedFile;
 	parsedFile.open(filepath);
 	std::string line;
-	system("cls");
+	//system("cls"); In linux standard library there is no such thing like conio.h
 	while(parsedFile.good())
 	{
 		std::getline(parsedFile, line);
@@ -46,7 +46,7 @@ std::vector<std::string> parseLine(const std::string& row)
 		}
 		if(row[i] == TOKEN_COMMENT) 
 		{
-			token.pop_back();
+			token.pop_back(); 
 			tokens.push_back(token);
 			break;
 		}						
@@ -58,8 +58,9 @@ std::vector<std::string> parseLine(const std::string& row)
 
 TOKENS getToken(const std::string& param)
 {
-	switch(param) {
+//	Illegal operation
+//	switch(param) {
 
-	}
+//	}
 
 };
