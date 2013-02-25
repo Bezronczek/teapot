@@ -14,33 +14,7 @@ void parseFile(const std::string& filepath) {
 		std::string token;
 		TEALex::state tokenType;
 		while ((tokenType = pLex->getToken(token)) != TEALex::state::NOOP) {
-			switch (tokenType) {
-			case TEALex::state::LABEL:
-				std::cout << "Label ";
-				break;
-			case TEALex::state::NUMBER:
-				std::cout << "Number ";
-				break;
-			case TEALex::state::POINTER:
-				std::cout << "Pointer ";
-				break;
-			case TEALex::state::STATEMENT:
-				std::cout << "Symbol ";
-				break;
-			case TEALex::state::STRING:
-				std::cout << "String ";
-				break;
-			case TEALex::state::FLOAT:
-				std::cout << "Float ";
-				break;
-			case TEALex::state::HEX:
-				std::cout << "Hex ";
-				break;
-			default:
-				std::cout << "What happen?" << std::endl;
-				break;
-			}
-			std::cout << token << std::endl;
+
 		}
 		//	parseLine(line);
 	}
