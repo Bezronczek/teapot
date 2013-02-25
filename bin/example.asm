@@ -1,5 +1,5 @@
 .static
-db MojePiwoHelloWorld "Hello World; Teapot 0.1"
+db MojePiwoHelloWorld "Hello World; Teapot 0.1; Author: \"Rafal Czaja\";"
 ; Begin of the code segment
 .code
 	mov ax, @MojePiwoHelloWorld; Pass address of MojePiwoHelloWorld to ax
