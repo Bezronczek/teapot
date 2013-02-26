@@ -8,6 +8,7 @@ void parseFile(const std::string& filepath) {
 	std::string line;
 	//system("cls"); In linux standard library there is no such thing like conio.h
 	TEALex *pLex = new TEALex;
+	TEAParser *pParser = new TEAParser;
 	while (parsedFile.good()) {
 		std::getline(parsedFile, line);
 		pLex->feed(line);
