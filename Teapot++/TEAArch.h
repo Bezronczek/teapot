@@ -11,6 +11,7 @@
 #include <string>
 #include <fstream>
 #include <iostream>
+#include "TEASerialize.h"
 //class TEASerialize {
 //public:
 //	TEASerialize() {
@@ -55,13 +56,6 @@
 //private:
 //	std::map<std::string, TEASerialize*> *m_pMap;
 //};
-
-class TByte {
-public:
-	TByte() {
-	}
-	virtual unsigned int get() = 0;
-};
 
 class TRegister: public TByte {
 public:

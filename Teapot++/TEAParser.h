@@ -15,24 +15,7 @@
 #include "TEALex.h"
 #include "TEAArch.h"
 #include "TEA0x7dd.h"
-class TNode {
-public:
-	enum ArgType {
-		REGISTER, NUMBER, POINTER
-	};
-	TNode() {
-	}
-	TNode(TByte *ptr) :
-			m_pPtr(ptr), m_pArgs(new std::vector<ArgType>) {
-	}
-	bool add(ArgType iType) {
-		m_pArgs->push_back(iType);
-		return true;
-	}
-private:
-	TByte *m_pPtr;
-	std::vector<ArgType> *m_pArgs;
-};
+#include "TEASerialize.h"
 
 class TPointer: public TNode {
 public:
@@ -51,11 +34,18 @@ private:
 	int m_pAddress;
 };
 
-class TEAParser {
+class TEAParser: public TEASerialize {
 public:
 	TEAParser();
 	virtual ~TEAParser();
 	void addToken(TEALex::state tokenType, const std::string& strTokenValue);
+
+	virtual const_node_iterator getNodeBegin() const {
+		return m_pNode->begin();
+	}
+	virtual const_node_iterator getNodeEnd() const {
+		return m_pNode->end();
+	}
 private:
 	TPointer *getPointer(const std::string &strSymbol);
 	TPointer *registerPointer(const std::string &strSymbol);

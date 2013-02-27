@@ -2,14 +2,14 @@
 #include <vector>
 #include "TEALex.h"
 #include "TEAParser.h"
+#include "TEABinary.h"
 void parseFile(const std::string& filepath);
 //funkcja obslugujaca linie zaczynajace sie kropka
 void special(char* token, char* param);
 //funkcja obslugujca linie zaczynajaece sie malym znakiem
-void command(char*  command, char* param);
+void command(char* command, char* param);
 //tokeny
-enum TOKENS 
-{
+enum TOKENS {
 	TOKEN_WHITESPACE = ' ',
 	TOKEN_TAB = '\t',
 	TOKEN_SPECIAL = '.',

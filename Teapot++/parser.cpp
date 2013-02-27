@@ -17,9 +17,10 @@ void parseFile(const std::string& filepath) {
 		while ((tokenType = pLex->getToken(token)) != TEALex::state::NOOP) {
 			pParser->addToken(tokenType, token);
 		}
-		//	parseLine(line);
-	}
 
+	}
+	TEABinary CWriter("a.out");
+	CWriter << (*pParser);
 	parsedFile.close();
 }
 
