@@ -46,6 +46,7 @@ void TEAParser::addToken(TEALex::state tokenType,
 		m_pNode->push_back(pPointer);
 		m_iAddress++;
 	} else if (tokenType == TEALex::state::LABEL) {
+		m_pCurr = 0l;
 		registerSymbol(strTokenValue);
 	}
 }
