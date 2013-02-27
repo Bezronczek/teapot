@@ -64,7 +64,7 @@ public:
 	}
 	virtual ~TRegister() {
 	}
-	virtual unsigned int get() {
+	virtual unsigned int get() const {
 		return m_iId;
 	}
 private:
@@ -77,7 +77,7 @@ public:
 	}
 	virtual ~TInstruction() {
 	}
-	virtual unsigned int get() {
+	virtual unsigned int get() const {
 		return m_iId;
 	}
 private:

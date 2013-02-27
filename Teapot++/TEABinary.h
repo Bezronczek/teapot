@@ -18,7 +18,8 @@ public:
 	void operator <<(const TEASerialize &obj) {
 		for (const_node_iterator it = obj.getNodeBegin();
 				it != obj.getNodeEnd(); ++it) {
-			std::cout << "Cos tam, cos tam" << std::endl;
+			unsigned int out = ((*it)->get());
+			m_pStream->write(reinterpret_cast<char *>(&out), sizeof(int));
 		}
 	}
 private:

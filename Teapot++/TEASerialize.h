@@ -13,7 +13,7 @@ class TByte {
 public:
 	TByte() {
 	}
-	virtual unsigned int get() = 0;
+	virtual unsigned int get() const = 0;
 };
 
 class TNode {
@@ -29,6 +29,9 @@ public:
 	bool add(ArgType iType) {
 		m_pArgs->push_back(iType);
 		return true;
+	}
+	virtual unsigned int get() const {
+		return m_pPtr->get();
 	}
 private:
 	TByte *m_pPtr;

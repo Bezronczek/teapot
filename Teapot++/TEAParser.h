@@ -20,7 +20,7 @@
 class TPointer: public TNode {
 public:
 	TPointer() :
-			m_bInitialized(false) {
+			m_bInitialized(false), m_pAddress(0) {
 	}
 	TPointer(int pAddress) :
 			m_bInitialized(true), m_pAddress(pAddress) {
@@ -28,6 +28,9 @@ public:
 	void setAddress(int iAddress) {
 		m_bInitialized = true;
 		m_pAddress = iAddress;
+	}
+	virtual unsigned int get() const {
+		return m_pAddress;
 	}
 private:
 	bool m_bInitialized;
