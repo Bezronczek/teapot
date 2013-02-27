@@ -15,7 +15,7 @@ void parseFile(const std::string& filepath) {
 		std::string token;
 		TEALex::state tokenType;
 		while ((tokenType = pLex->getToken(token)) != TEALex::state::NOOP) {
-
+			pParser->addToken(tokenType, token);
 		}
 		//	parseLine(line);
 	}

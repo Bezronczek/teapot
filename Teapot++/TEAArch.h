@@ -60,7 +60,7 @@ class TByte {
 public:
 	TByte() {
 	}
-	virtual unsigned int getRepresetation() = 0;
+	virtual unsigned int get() = 0;
 };
 
 class TRegister: public TByte {
@@ -70,7 +70,7 @@ public:
 	}
 	virtual ~TRegister() {
 	}
-	unsigned int getRepresatation() {
+	virtual unsigned int get() {
 		return m_iId;
 	}
 private:
@@ -83,7 +83,7 @@ public:
 	}
 	virtual ~TInstruction() {
 	}
-	unsigned int getRepresatation() {
+	virtual unsigned int get() {
 		return m_iId;
 	}
 private:
@@ -92,10 +92,12 @@ private:
 
 class TEAArch {
 public:
-	TEAArch(){}
-	virtual ~TEAArch(){}
+	TEAArch() {
+	}
+	virtual ~TEAArch() {
+	}
 	virtual TInstruction *getInstruction(const std::string& symbol) = 0;
-
+	virtual TRegister *getRegister(const std::string& symbol) = 0;
 };
 
 #endif /* TEAARCH_H_ */

@@ -49,6 +49,11 @@ TEALex::state TEALex::getToken(std::string & strToken) {
 			}
 			m_bEscapeChar = true;
 			continue;
+		} else if ((byte == ':') && (m_enumState == STATEMENT)) {
+			enumResult = SYMBOL;
+			m_enumState = NOOP;
+			++m_itCurrPos;
+			break;
 		} else if ((byte >= '0') && (byte <= '9') && (m_enumState == NOOP)) {
 			enumResult = m_enumState = NUMBER;
 		} else if ((m_enumState == NUMBER) && (byte == 'x')) {

@@ -8,17 +8,28 @@
 #ifndef TEAPARSER_H_
 #define TEAPARSER_H_
 #include <map>
+#include <list>
+#include <vector>
 #include <string>
-#include "TEAArch.h"
+#include <iostream>
 #include "TEALex.h"
-class TEAInstruction {
+#include "TEAArch.h"
+#include "TEA0x7dd.h"
+class TNode {
 public:
-	TEAInstruction(unsigned int iNumber, int iArguments) :
-			m_iNumber(iNumber), m_iArguments(iArguments) {
+	enum ArgType{
+		REGISTER, NUMBER, POINTER
+	};
+	TNode(TByte *ptr) :
+			m_pPtr(ptr), m_pArgs(new std::vector<ArgType>) {
+	}
+	bool add(ArgType iType) {
+		m_pArgs->push_back(iType);
+		return true;
 	}
 private:
-	unsigned int m_iNumber;
-	int m_iArguments;
+	TByte *m_pPtr;
+	std::vector<ArgType> *m_pArgs;
 };
 class TEAParser {
 public:
@@ -26,13 +37,10 @@ public:
 	virtual ~TEAParser();
 	void addToken(TEALex::state tokenType, const std::string& strTokenValue);
 private:
-	unsigned int m_iAddress;
-	typedef std::map<std::string, TEAInstruction> InstructionMapType;
-	InstructionMapType m_InstructionMap;
-	typedef std::map<std::string, std::string> StringSymbolType;
-	StringSymbolType m_StringSymbolMap;
-	typedef std::map<std::string, unsigned int> SymbolMapType;
-	SymbolMapType m_SymbolMap;
+	int m_iAddress;
+	TEAArch *m_pArch;
+	TNode *m_pCurr;
+	std::list<TNode*> *m_pNode;
 };
 
 #endif /* TEAPARSER_H_ */
