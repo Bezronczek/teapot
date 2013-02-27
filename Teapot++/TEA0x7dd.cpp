@@ -33,6 +33,10 @@ TEA0x7dd::TEA0x7dd() {
 
 	m_Instruction["push"] = new TInstruction(10);
 	m_Instruction["pop"] = new TInstruction(11);
+
+	m_Instruction["cmp"] = new TInstruction(12);
+	m_Instruction["je"] = new TInstruction(13);
+	m_Instruction["jne"] = new TInstruction(14);
 }
 
 TEA0x7dd::~TEA0x7dd() {

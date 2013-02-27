@@ -1,14 +1,14 @@
 .static
-db MojePiwoHelloWorld "Hello World; Teapot 0.1; Author: \"Rafal Czaja\";"
+MojePiwoHelloWorld: "Hello World; Teapot 0.1; Author: \"Rafal Czaja\";"
 ; Begin of the code segment
 .code
 	mov ax, @MojePiwoHelloWorld; Pass address of MojePiwoHelloWorld to ax
 	push ax
-	call TEAPrintFunction
+	call @TEAPrintFunction
 	pop ax ; Get result from stack
 	mov bx, 0
 	cmp ax, bx
-	jne failedToPrint
+	jne @failedToPrint
 
 .failedToPrint
 	push ax

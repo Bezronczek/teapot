@@ -17,9 +17,11 @@
 #include "TEA0x7dd.h"
 class TNode {
 public:
-	enum ArgType{
+	enum ArgType {
 		REGISTER, NUMBER, POINTER
 	};
+	TNode() {
+	}
 	TNode(TByte *ptr) :
 			m_pPtr(ptr), m_pArgs(new std::vector<ArgType>) {
 	}
@@ -31,15 +33,39 @@ private:
 	TByte *m_pPtr;
 	std::vector<ArgType> *m_pArgs;
 };
+
+class TPointer: public TNode {
+public:
+	TPointer() :
+			m_bInitialized(false) {
+	}
+	TPointer(int pAddress) :
+			m_bInitialized(true), m_pAddress(pAddress) {
+	}
+	void setAddress(int iAddress) {
+		m_bInitialized = true;
+		m_pAddress = iAddress;
+	}
+private:
+	bool m_bInitialized;
+	int m_pAddress;
+};
+
 class TEAParser {
 public:
 	TEAParser();
 	virtual ~TEAParser();
 	void addToken(TEALex::state tokenType, const std::string& strTokenValue);
 private:
+	TPointer *getPointer(const std::string &strSymbol);
+	TPointer *registerPointer(const std::string &strSymbol);
+
+	bool registerSymbol(const std::string &strSymbol);
+
 	int m_iAddress;
 	TEAArch *m_pArch;
 	TNode *m_pCurr;
+	std::map<std::string, TPointer*> *m_pSymbolMap;
 	std::list<TNode*> *m_pNode;
 };
 
