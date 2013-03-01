@@ -37,6 +37,27 @@ private:
 	int m_pAddress;
 };
 
+class TString: public TNode {
+public:
+	TString(const std::string& str) :
+			m_strValue(str) {
+	}
+
+	virtual unsigned int get() const {
+		return m_strValue.length();
+	}
+
+	const char* getBinary() const {
+		return m_strValue.c_str();
+	}
+
+	virtual bool binary() const {
+		return true;
+	}
+private:
+	std::string m_strValue;
+};
+
 class TEAParser: public TEASerialize {
 public:
 	TEAParser();
@@ -56,6 +77,10 @@ private:
 	bool registerSymbol(const std::string &strSymbol);
 
 	int m_iAddress;
+	void incAddress(int i = 4) {
+		m_iAddress += i;
+	}
+
 	TEAArch *m_pArch;
 	TNode *m_pCurr;
 	std::map<std::string, TPointer*> *m_pSymbolMap;

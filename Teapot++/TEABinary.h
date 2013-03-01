@@ -18,8 +18,12 @@ public:
 	void operator <<(const TEASerialize &obj) {
 		for (const_node_iterator it = obj.getNodeBegin();
 				it != obj.getNodeEnd(); ++it) {
-			unsigned int out = ((*it)->get());
-			m_pStream->write(reinterpret_cast<char *>(&out), sizeof(int));
+			if ((*it)->binary()) {
+				m_pStream->write((*it)->getBinary(), (*it)->get());
+			} else {
+				unsigned int out = ((*it)->get());
+				m_pStream->write(reinterpret_cast<char *>(&out), sizeof(int));
+			}
 		}
 	}
 private:

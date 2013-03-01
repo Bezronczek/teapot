@@ -10,3 +10,6 @@ RightResult:
 
 WrongResult:
 ; do much more nothing
+
+.static
+	TEAWelcome: "HelloWorld; First review;"

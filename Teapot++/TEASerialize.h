@@ -33,6 +33,13 @@ public:
 	virtual unsigned int get() const {
 		return m_pPtr->get();
 	}
+
+	virtual const char *getBinary() const {
+		return 0l;
+	}
+	virtual bool binary() const {
+		return false;
+	}
 private:
 	TByte *m_pPtr;
 	std::vector<ArgType> *m_pArgs;

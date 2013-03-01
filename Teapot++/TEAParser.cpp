@@ -22,14 +22,14 @@ void TEAParser::addToken(TEALex::state tokenType,
 		TByte *pInstruction = m_pArch->getInstruction(strTokenValue);
 		if (pInstruction != 0l) {
 			std::cout << "Instruction: " << strTokenValue << std::endl;
-			m_iAddress++;
+			incAddress();
 			m_pCurr = new TNode(pInstruction);
 			m_pNode->push_back(m_pCurr);
 		} else {
 			pInstruction = m_pArch->getRegister(strTokenValue);
 			if (pInstruction != 0l) {
 				std::cout << "Register: " << strTokenValue << std::endl;
-				m_iAddress++;
+				incAddress();
 				m_pCurr->add(TNode::ArgType::REGISTER);
 				m_pNode->push_back(new TNode(pInstruction));
 			} else {
@@ -44,10 +44,13 @@ void TEAParser::addToken(TEALex::state tokenType,
 		std::cout << "Pointer: " << strTokenValue << std::endl;
 		m_pCurr->add(TNode::ArgType::POINTER);
 		m_pNode->push_back(pPointer);
-		m_iAddress++;
+		incAddress();
 	} else if (tokenType == TEALex::state::LABEL) {
 		m_pCurr = 0l;
 		registerSymbol(strTokenValue);
+	} else if (tokenType == TEALex::state::STRING) {
+		incAddress(strTokenValue.length());
+		m_pNode->push_back(new TString(strTokenValue));
 	}
 }
 
