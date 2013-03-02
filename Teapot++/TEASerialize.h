@@ -73,13 +73,32 @@ public:
 	}
 	TNode(TByte *ptr) :
 			m_pPtr(ptr), m_pArgs(new std::vector<ArgType>) {
+		std::cout << "TNode(ptr->get())=" << ptr->get() << std::endl;
 	}
 	bool add(ArgType iType) {
 		m_pArgs->push_back(iType);
 		return true;
 	}
 	virtual unsigned int get() const {
-		return m_pPtr->get();
+		unsigned int result = m_pPtr->get();
+		std::cout << "R: " << result << std::endl;
+		TEABitmask::setInstructionMagicBit(result);
+		std::cout << "R: " << result << std::endl;
+		TEABitmask::setInstructionCout(result, m_pArgs->size());
+		std::cout << "R: " << result << std::endl;
+		if (m_pArgs->size() > 0) {
+			if (m_pArgs->size() >= 1)
+				if (m_pArgs->at(0) == ArgType::REGISTER)
+					TEABitmask::setFirstArgAsRegister(result);
+			std::cout << "R: " << result << std::endl;
+
+			if (m_pArgs->size() >= 2)
+				if (m_pArgs->at(1) == ArgType::REGISTER)
+					TEABitmask::setSecondArgAsRegister(result);
+			std::cout << "R: " << result << std::endl;
+
+		}
+		return result;
 	}
 
 	virtual const char *getBinary() const {
