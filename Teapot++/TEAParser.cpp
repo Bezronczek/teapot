@@ -51,6 +51,11 @@ void TEAParser::addToken(TEALex::state tokenType,
 	} else if (tokenType == TEALex::state::STRING) {
 		incAddress(strTokenValue.length());
 		m_pNode->push_back(new TString(strTokenValue));
+	} else if (tokenType == TEALex::state::NUMBER) {
+		m_pCurr->add(TNode::ArgType::NUMBER);
+		m_pNode->push_back(new TInt(atoi(strTokenValue.c_str())));
+		std::cout << "Integer: " << strTokenValue << std::endl;
+		incAddress();
 	}
 }
 

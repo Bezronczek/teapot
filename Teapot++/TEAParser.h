@@ -58,6 +58,19 @@ private:
 	std::string m_strValue;
 };
 
+class TInt: public TNode {
+public:
+	TInt(const int iValue) :
+			m_iValue(iValue) {
+	}
+
+	virtual unsigned int get() const {
+		return (unsigned int) (m_iValue);
+	}
+private:
+	int m_iValue;
+};
+
 class TEAParser: public TEASerialize {
 public:
 	TEAParser();
